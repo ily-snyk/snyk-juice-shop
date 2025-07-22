@@ -17,7 +17,7 @@ module.exports = function getUserProfile () {
   return (req, res, next) => {
     // 🔥 Arbitrary File Read via query param (e.g., ?file=../../../../etc/passwd)
     const filePath = req.query.file || 'views/userProfile.pug'
-    const fullPath = path.join(__dirname, '..', filePath) // no sanitization
+    const fullPath = path.join(__dirname, '..', path.basename(filePath)) 
 
     fs.readFile(fullPath, function (err, buf) {
       if (err) return next(err)
